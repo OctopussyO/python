@@ -22,7 +22,55 @@ print("Координата y =", y)
 # 4. Длина исходной строки для частей должна быть в соответствии с форматом
 #  (т.е. 2 символа для дня, 2 - для месяца, 4 - для года)
 
+print("\n***Задача 2***")
 
+u1 = False
+u2 = False
+u3 = False
+u4 = False
+
+day30 = {i + 1 for i in range(30)}
+day31 = {i + 1 for i in range(31)}
+
+mon31 = {1, 3, 5, 7, 8, 10, 12}
+mon30 = {2, 4, 6, 9, 11}
+
+date = (input("Введите дату в формате dd.mm.yyyy: ")).split('.')
+
+if len(date[0]) == 2 and len(date[1]) == 2 and len(date[2]) == 4:
+  u4 = True
+else:
+  print("Установлено 2 символа для дня, 2 - для месяца, 4 - для года")
+
+for i in range(len(date)):
+  while date[i][0] == '0':
+    date[i] = date[i][1:]
+
+day = int(date[0])
+mon = int(date[1])
+year = int(date[2])
+
+if mon in mon30 and day in day30:
+  u1 = True
+elif mon in mon31 and day in day31:
+  u1 = True
+else:
+  print("В этом месяце нет такого числа.")
+
+if 1 <= mon <= 12:
+  u2 = True
+else:
+  print("Месяц должен быть в диапазоне от 1 до 12")
+
+if 1 <= year <= 9999:
+  u3 = True
+else:
+  print("Год должен быть в диапазоне от 1 до 9999.")
+
+if u1 * u2 * u3 * u4 == 1:
+  print("Дата введена корректно.")
+else:
+  print("Дата введена некорректно.")
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
 # Вавилонцы решили построить удивительную башню —
