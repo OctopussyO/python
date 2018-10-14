@@ -11,6 +11,79 @@
 
 print("***Задача №1***")
 
+def nod(list_):
+    a = list_[0]
+    for i in range(1, len(list_)):
+        if a != 1:            
+            b = list_[i]
+            if b != 1:
+                while b:
+                    a, b = b, a%b                
+            else:
+                a = list_[i]
+                continue
+        else:
+            a = list_[i]
+            continue
+    NOD = abs(a)
+    return NOD
+    
+def nok(list_, NOD):
+    pr = 1
+    for i in range(len(list_)):
+        pr = pr * list_[i]
+    NOK = pr / NOD
+    return NOK
+
+x = (input("Введите выражение: ")).split(" ")
+
+cis = []
+zn = []
+s = []
+
+if "+" not in x[0]:
+    s.append(1)
+elif "-" in x[0]:
+    s.append(-1)
+    x = x[1:]
+
+i = 0
+while len(x) > 0:
+    if "/" in x[i]:
+        cis.append(int(x[i].split("/")[0]))
+        zn.append(int(x[i].split("/")[1]))
+    elif x[i] == "+":
+        s.append(1)
+    elif x[i] == "-":
+        s.append(-1)
+    else:
+        cis.append(int(x[i]))
+        zn.append(1)
+        s.append(1)
+    x = x[i+1:]
+
+NOK = nok(zn, nod(zn))
+
+c = 0
+z = int(NOK)
+cel = ""
+
+for i in range(len(cis)):
+    c = c + s[i] * cis[i] * NOK / zn[i]
+
+NOD = nod([c, NOK])
+
+c = int(c / NOD)
+z = int(z / NOD)
+
+if abs(c // z) >= 1:
+    cel = int(c // z)
+    c = int(abs(c % z))
+
+print("Результат вычисления: {} {}/{}".format(cel, c, z))
+
+
+"""
 # Задание-2:
 # Дана ведомость расчета заработной платы (файл "data/workers").
 # Рассчитайте зарплату всех работников, зная что они получат полный оклад,
@@ -35,3 +108,4 @@ print("\n***Задача №2***")
 # print(list(map(chr, range(ord('А'), ord('Я')+1))))
 
 print("\n***Задача №3***")
+"""
