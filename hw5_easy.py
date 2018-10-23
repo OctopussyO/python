@@ -71,15 +71,15 @@ def copy_current_file():
     src = os.path.join(os.getcwd(), os.path.basename(__file__))
     dst = os.path.join(os.getcwd(), 'copy_' + os.path.basename(__file__))
 
-    source = open(src, 'r', encoding="UTF-8")
-    dest = open(dst, 'w', encoding="UTF-8")
+    source = open(src, 'rb', encoding="UTF-8")
+    dest = open(dst, 'wb', encoding="UTF-8")
 
     while True:
         copy_buffer = source.read()
         if not copy_buffer:
             break
         dest.write(copy_buffer)
-        print(copy_buffer)
+
 
     source.close()
     dest.close()
